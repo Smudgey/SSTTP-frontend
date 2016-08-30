@@ -1,8 +1,3 @@
-
-/**
-  * Created by MacZ on 26/08/2016.
-  */
-
   /*
    * Copyright 2016 HM Revenue & Customs
    *
