@@ -5,7 +5,7 @@
 @(detailsForm : Form[DueFormInformation])(implicit request: Request[_])
 
 
-@uk.gov.hmrc.SSTTP.html.main_template(title = Messages("page.recorddetails.EnterYourDetails.title"), bodyClasses = None) {
+@uk.gov.hmrc.SSTTP.html.main_template(title = ("HELLLOOOOOO"), bodyClasses = None) {
 
 <div class="grid-row">
     <div class="column-two-thirds">
@@ -26,7 +26,7 @@
             @input(
             detailsForm("date"),
             '_label -> Messages("page1.date"),
-            '_labelDataAttributes -> "id=firstNameLabel",
+            '_labelDataAttributes -> "id=dateLabel",
             '_labelClass -> "heading-small",
             '_inputClass -> "form-control form-control--block"
             )
@@ -34,9 +34,9 @@
 
         <div class="form-group">
             @input(
-            detailsForm("amount"),
+            detailsForm("cleared"),
             '_label -> Messages("page1.amount"),
-            '_labelDataAttributes -> "id=firstNameLabel",
+            '_labelDataAttributes -> "id=amountLabel",
             '_labelClass -> "heading-small",
             '_inputClass -> "form-control form-control--block"
             )

@@ -1,5 +1,6 @@
 package uk.gov.hmrc.SSTTP.controllers
 
+import play.api.libs.ws.{WS, WSResponse}
 import uk.gov.hmrc.SSTTP.DueForm._
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
@@ -14,7 +15,7 @@ import uk.gov.hmrc.SSTTP.models._
 import uk.gov.hmrc.play.health.routes
 
 import scala.concurrent.Future
-
+import play.api.libs.json._
 
 
 object HelloWorld extends HelloWorld {
@@ -38,6 +39,13 @@ trait HelloWorld extends FrontendController {
         Future.successful(BadRequest(hello_world(formWithErrors)))
       },
       userDetails => {
+
+        val data = Json.obj(
+          "key1" -> "value1",
+          "key2" -> "value2"
+        )
+        //val futureResponse: Future[WSResponse] = WS.url("http://localhost:9000/hello-world/enter-your-details").post(data)
+
         BusinessRegistrationConnector.submitUserDetails(userDetails).flatMap {
           _ => Future.successful(Redirect(routes.HelloWorld.show()))
         }

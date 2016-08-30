@@ -1,4 +1,5 @@
 common.errorSummary.label=The following errors were identified on this page.
+common.button.snc=Save and continue
 
 page.recorddetails.EnterYourDetails.title=Enter your details
 page.recorddetails.EnterYourDetails.heading=Enter your details
