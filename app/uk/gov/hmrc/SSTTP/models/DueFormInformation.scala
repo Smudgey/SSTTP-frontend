@@ -25,7 +25,9 @@
   import play.api.libs.json.Json
   import uk.gov.hmrc.time.DateTimeUtils
 
-  case class DueFormInformation(date : String, cleared : String)
+  case class DueFormInformation(
+                                 date : String,
+                                 cleared : String)//timeNeeded: Int)
 
   object DueFormInformation {
     implicit val format = Json.format[DueFormInformation]
@@ -34,6 +36,7 @@
       BetaUserInformationSubmit(
         details.date,
         details.cleared,
+       // details.timeNeeded,//change to how long needed
         DateTimeUtils.now)
     }
 
@@ -42,6 +45,7 @@
 
   case class BetaUserInformationSubmit(date : String,
                                        cleared : String,
+                                       //timeNeeded: Int,
                                        submissionTime : DateTime)
 
   object BetaUserInformationSubmit {

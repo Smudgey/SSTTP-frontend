@@ -14,6 +14,7 @@ object dueform {
     mapping(
       "date" -> nonEmptyText,
       "cleared" -> nonEmptyText
+     // "time" -> nonEmptyText
     )(DueFormInformation.apply)(DueFormInformation.unapply)
   )
 }

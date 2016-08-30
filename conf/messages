@@ -3,4 +3,6 @@ common.errorSummary.label=The following errors were identified on this page.
 page.recorddetails.EnterYourDetails.title=Enter your details
 page.recorddetails.EnterYourDetails.heading=Enter your details
 page1.date = Please enter your tax due date
+page1.amount = Please enter debt amount on Letter
+page1.time = Please enter the time you need to pay of debt
 page.recorddetails.EnterYourDetails.lede=You can enter your details here so you can be invited to try out the new streamlined company registration service.
