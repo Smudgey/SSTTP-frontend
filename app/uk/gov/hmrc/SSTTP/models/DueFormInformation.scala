@@ -1,4 +1,3 @@
-package uk.gov.hmrc.SSTTP.models
 
 /**
   * Created by MacZ on 26/08/2016.
@@ -20,7 +19,7 @@ package uk.gov.hmrc.SSTTP.models
    * limitations under the License.
    */
 
-  package models
+  package uk.gov.hmrc.SSTTP.models
 
   import org.joda.time.DateTime
   import play.api.libs.json.Json

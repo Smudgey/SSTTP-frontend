@@ -1,4 +1,4 @@
-package uk.gov.hmrc.SSTTP
+package uk.gov.hmrc.SSTTP.config
 
 import java.io.File
 
