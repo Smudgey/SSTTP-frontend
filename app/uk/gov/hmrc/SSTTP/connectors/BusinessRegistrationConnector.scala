@@ -29,7 +29,7 @@ import scala.concurrent.Future
 
 
 object BusinessRegistrationConnector extends BusinessRegistrationConnector with ServicesConfig {
-  val businessRegUrl = baseUrl("business-registration")
+  val businessRegUrl = baseUrl("SSTTP")
   val http = WSHttp
 }
 
@@ -40,10 +40,10 @@ trait BusinessRegistrationConnector {
 
   def submitUserDetails(userInformation : BetaUserInformationSubmit)(implicit hc: HeaderCarrier) : Future[BetaUserInformationSubmit] = {
     val userJson = Json.toJson[BetaUserInformationSubmit](userInformation)
-    http.POST[JsValue, BetaUserInformationSubmit](s"$businessRegUrl/business-registration/beta-sign-up", userJson)
+    http.POST[JsValue, BetaUserInformationSubmit](s"$businessRegUrl/SSTTP/InterestRateCalculator", userJson)
   }
 
-  def getUserDetailsForTests(queryParameter : String)
+ /* def getUserDetailsForTests(queryParameter : String)
                             (implicit hc : HeaderCarrier, rds : HttpReads[BetaUserInformationSubmit])
   : Future[Option[BetaUserInformationSubmit]] = {
     http.GET[Option[BetaUserInformationSubmit]](s"$businessRegUrl/business-registration/test-only/get-beta-user/$queryParameter")
@@ -51,5 +51,5 @@ trait BusinessRegistrationConnector {
 
   def clearUsersForTests()(implicit hc : HeaderCarrier) : Future[Option[Response]] = {
     http.GET[Option[Response]](s"$businessRegUrl/business-registration/test-only/clear-beta-users")
-  }
+  }*/
 }

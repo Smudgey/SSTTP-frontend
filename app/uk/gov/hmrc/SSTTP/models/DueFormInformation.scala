@@ -1,8 +1,3 @@
-
-/**
-  * Created by MacZ on 26/08/2016.
-  */
-
   /*
    * Copyright 2016 HM Revenue & Customs
    *
@@ -21,21 +16,24 @@
 
   package uk.gov.hmrc.SSTTP.models
 
+  import java.time.temporal.TemporalAmount
+
   import org.joda.time.DateTime
   import play.api.libs.json.Json
   import uk.gov.hmrc.time.DateTimeUtils
 
-  case class DueFormInformation(
-                                 date : String,
-                                 cleared : String)//timeNeeded: Int)
+  case class DueFormInformation( amount: Double,
+                                 days : Int,
+                                 interest : Double)//timeNeeded: Int)
 
   object DueFormInformation {
     implicit val format = Json.format[DueFormInformation]
 
     implicit def userDetailsCaptureToSubmit(details : DueFormInformation) : BetaUserInformationSubmit = {
       BetaUserInformationSubmit(
-        details.date,
-        details.cleared,
+        details.amount,
+        details.days,
+        details.interest,
        // details.timeNeeded,//change to how long needed
         DateTimeUtils.now)
     }
@@ -43,8 +41,9 @@
   }
 
 
-  case class BetaUserInformationSubmit(date : String,
-                                       cleared : String,
+  case class BetaUserInformationSubmit(amount: Double,
+                                        days : Int,
+                                       interest: Double,
                                        //timeNeeded: Int,
                                        submissionTime : DateTime)
 
