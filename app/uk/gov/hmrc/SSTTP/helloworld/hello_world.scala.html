@@ -24,8 +24,8 @@
 
         <div class="form-group">
             @input(
-            detailsForm("date"),
-            '_label -> Messages("page1.date"),
+            detailsForm("amount"),
+            '_label -> Messages("page1.amount"),
             '_labelDataAttributes -> "id=dateLabel",
             '_labelClass -> "heading-small",
             '_inputClass -> "form-control form-control--block"
@@ -34,9 +34,20 @@
 
         <div class="form-group">
             @input(
-            detailsForm("cleared"),
-            '_label -> Messages("page1.amount"),
+            detailsForm("days"),
+            '_label -> Messages("page1.days"),
             '_labelDataAttributes -> "id=amountLabel",
+            '_labelClass -> "heading-small",
+            '_inputClass -> "form-control form-control--block"
+            )
+        </div>
+
+
+        <div class="form-group">
+            @input(
+            detailsForm("interest"),
+            '_label -> Messages("page1.interest"),
+            '_labelDataAttributes -> "id=dateLabel",
             '_labelClass -> "heading-small",
             '_inputClass -> "form-control form-control--block"
             )

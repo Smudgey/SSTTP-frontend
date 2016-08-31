@@ -4,7 +4,7 @@ import play.api.libs.ws.{WS, WSResponse}
 import uk.gov.hmrc.SSTTP.DueForm._
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
-
+import play.api.data.format.Formats._
 import scala.concurrent.Future
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc.Action
@@ -19,17 +19,18 @@ import play.api.libs.json._
 
 
 object HelloWorld extends HelloWorld {
-  val businessRegConnector = BusinessRegistrationConnector
+ // val businessRegConnector = BusinessRegistrationConnector
 }
 
 trait HelloWorld extends FrontendController {
   /*val helloWorld = Action.async { implicit request =>
 		Future.successful(Ok(uk.gov.hmrc.SSTTP.helloworld.html.hello_world()))
   }*/
-  val businessRegConnector : BusinessRegistrationConnector
+
+  //val businessRegConnector : BusinessRegistrationConnector
 
   val show = Action.async { implicit request =>
-    val detailForm = dueform.form.fill(new DueFormInformation("",""))
+    val detailForm = dueform.form.fill(new DueFormInformation(0.0,0,0.0))
     Future.successful(Ok(hello_world(detailForm)))//hhh
   }
 
@@ -42,7 +43,8 @@ trait HelloWorld extends FrontendController {
 
         val data = Json.obj(
           "key1" -> "value1",
-          "key2" -> "value2"
+          "key2" -> "value2",
+          "key3" -> "value3"
         )
         //val futureResponse: Future[WSResponse] = WS.url("http://localhost:9000/hello-world/enter-your-details").post(data)
 

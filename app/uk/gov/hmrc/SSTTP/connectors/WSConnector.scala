@@ -1,3 +1,4 @@
+/*
 package uk.gov.hmrc.SSTTP.connectors
 
 import org.joda.time.DateTime
@@ -11,7 +12,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import uk.gov.hmrc.play.config.ServicesConfig
 
 object WSConnector extends WSConnector with ServicesConfig {
-  override val taxToPayUrl = baseUrl("SSTTP")
+  override val taxToPayUrl = baseUrl("SSTTP-frontend")
 }
 
 trait WSConnector {
@@ -28,23 +29,25 @@ trait WSConnector {
       "startDate" -> startDate,
       "paymentFrequency" -> paymentFrequency
     )
-    val futureResponse: Future[WSResponse] = WS.url(url("/TaxToPayData")).post(data)
+    val futureResponse: Future[WSResponse] = WS.url(url("/hello-world/enter-your-details")).post(data)
   }
 
   def sendCleared(dfi: DueFormInformation)(implicit ec: ExecutionContext): Unit = {
     val data = Json.obj(
-      "date" -> dfi.date,
-      "cleared" -> dfi.cleared
+
+      "amount" -> dfi.amount,
+    "date" -> dfi.days,
+      "interest" -> dfi.interest
     )
     val futureResponse: Future[WSResponse] = WS.url(url("")).post(data)
   }
 
   def getCleared()(implicit ec: ExecutionContext): Future[DueFormInformation] = {
-    val holder: WSRequestHolder = WS.url(url("/TaxToPayData"))
+    val holder: WSRequestHolder = WS.url(url("/hello-world/enter-your-details"))
     val futureResponse: Future[DueFormInformation] = holder.get().map {
       response =>
         (response.json \ "DueFormInformation").as[DueFormInformation]
     }
     futureResponse
   }
-}
+}*/
