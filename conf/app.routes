@@ -1,6 +1,8 @@
 # microservice specific routes
 
-GET        /hello                                     uk.gov.hmrc.SSTTP.controllers.HelloWorld.show
+GET        /hello-world                                   uk.gov.hmrc.SSTTP.controllers.HelloWorld.show
+POST        /hello-world                                     uk.gov.hmrc.SSTTP.controllers.HelloWorld.submit
+#POST       /hello-world/enter-your-details            uk.gov.hmrc.SSTTP.controllers.HelloWorld.submit
+#POST       /hello-world/feedback                      uk.gov.hmrc.SSTTP.controllers.HelloWorld.createFeedback
 
-POST       /hello-world/enter-your-details            uk.gov.hmrc.SSTTP.controllers.HelloWorld.submit
 #GET        /beta-users/thank-you                     uk.gov.hmrc.SSTTP.controllers.HelloWorld.showConfirmation

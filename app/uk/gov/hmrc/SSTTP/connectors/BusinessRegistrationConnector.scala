@@ -17,19 +17,19 @@
 
 package uk.gov.hmrc.SSTTP.connectors
 
-import play.api.libs.json.{JsValue, Json}
-import uk.gov.hmrc.SSTTP.models.Response
+
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.play.http._
 import uk.gov.hmrc.SSTTP.models._
 import uk.gov.hmrc.SSTTP.config.WSHttp
 
-import scala.concurrent.Future
+import scala.concurrent.duration._
+import scala.concurrent.{ Await, Future}
 
 
 object BusinessRegistrationConnector extends BusinessRegistrationConnector with ServicesConfig {
-  val businessRegUrl = baseUrl("SSTTP")
+  val businessRegUrl = baseUrl("hello-world")
   val http = WSHttp
 }
 
@@ -38,9 +38,14 @@ trait BusinessRegistrationConnector {
   val businessRegUrl: String
   val http: HttpGet with HttpPost
 
-  def submitUserDetails(userInformation : BetaUserInformationSubmit)(implicit hc: HeaderCarrier) : Future[BetaUserInformationSubmit] = {
+  def submitUserDetails(userInformation: BetaUserInformationSubmit)(implicit hc: HeaderCarrier): Future[String] = {
     val userJson = Json.toJson[BetaUserInformationSubmit](userInformation)
-    http.POST[JsValue, BetaUserInformationSubmit](s"$businessRegUrl/SSTTP/InterestRateCalculator", userJson)
+
+    val post = http.POST[JsValue, String](s"$businessRegUrl/SSTTP/hello-world", userJson)
+
+    val actualValue = Await.result(post, 5.seconds)
+
+post
   }
 
  /* def getUserDetailsForTests(queryParameter : String)

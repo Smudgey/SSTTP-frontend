@@ -22,9 +22,9 @@
   import play.api.libs.json.Json
   import uk.gov.hmrc.time.DateTimeUtils
 
-  case class DueFormInformation( amount: Double,
-                                 days : Int,
-                                 interest : Double)//timeNeeded: Int)
+  case class DueFormInformation( amount: String,
+                                 days : String,
+                                 interest : String)//timeNeeded: Int)
 
   object DueFormInformation {
     implicit val format = Json.format[DueFormInformation]
@@ -41,9 +41,9 @@
   }
 
 
-  case class BetaUserInformationSubmit(amount: Double,
-                                        days : Int,
-                                       interest: Double,
+  case class BetaUserInformationSubmit(amount: String,
+                                        days : String,
+                                       interest: String,
                                        //timeNeeded: Int,
                                        submissionTime : DateTime)
 

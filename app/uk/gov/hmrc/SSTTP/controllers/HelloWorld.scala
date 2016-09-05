@@ -2,11 +2,9 @@ package uk.gov.hmrc.SSTTP.controllers
 
 import play.api.libs.ws.{WS, WSResponse}
 import uk.gov.hmrc.SSTTP.DueForm._
-import uk.gov.hmrc.play.frontend.controller.FrontendController
-import play.api.mvc._
-import play.api.data.format.Formats._
+
 import scala.concurrent.Future
-import uk.gov.hmrc.play.frontend.controller.FrontendController
+
 import play.api.mvc.Action
 import uk.gov.hmrc.SSTTP.connectors.BusinessRegistrationConnector
 import uk.gov.hmrc.SSTTP.helloworld.html.hello_world
@@ -16,25 +14,54 @@ import uk.gov.hmrc.play.health.routes
 
 import scala.concurrent.Future
 import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
+
+import uk.gov.hmrc.play.frontend.controller.FrontendController
+import play.api.mvc._
+import org.joda.time.{DateTime, Days, LocalDate}
+
+import uk.gov.hmrc.time.DateTimeUtils
+
+import scala.concurrent.Future
 
 object HelloWorld extends HelloWorld {
- // val businessRegConnector = BusinessRegistrationConnector
+  val businessRegConnector = BusinessRegistrationConnector
 }
 
-trait HelloWorld extends FrontendController {
+trait HelloWorld extends FrontendController with Controller{
   /*val helloWorld = Action.async { implicit request =>
 		Future.successful(Ok(uk.gov.hmrc.SSTTP.helloworld.html.hello_world()))
   }*/
 
-  //val businessRegConnector : BusinessRegistrationConnector
+  val businessRegConnector : BusinessRegistrationConnector
+
+
 
   val show = Action.async { implicit request =>
-    val detailForm = dueform.form.fill(new DueFormInformation(0.0,0,0.0))
+
+    val detailForm = dueform.form.fill(new DueFormInformation("","",""))
     Future.successful(Ok(hello_world(detailForm)))//hhh
   }
 
-  val submit = Action.async { implicit request =>
+  def submit = Action.async{ implicit request =>
+
+    dueform.form.bindFromRequest.fold(
+        success = {
+          Calculate =>
+            BusinessRegistrationConnector.submitUserDetails(Calculate).map {
+              resultFromBackEnd =>
+               Ok("it worked, value from backe ned was: " + resultFromBackEnd)
+            }
+        },
+      hasErrors = {
+        formWithErrors =>
+          Future.successful(BadRequest(hello_world(formWithErrors)))
+        }
+    )
+  }
+
+  def submit2 = Action.async { implicit request =>
     dueform.form.bindFromRequest.fold(
       formWithErrors => {
         Future.successful(BadRequest(hello_world(formWithErrors)))
@@ -54,6 +81,9 @@ trait HelloWorld extends FrontendController {
       }
     )
   }
+
+
+
 /*
   val showConfirmation = Action.async { implicit request =>
     Future.successful(Ok(Confirmation()))

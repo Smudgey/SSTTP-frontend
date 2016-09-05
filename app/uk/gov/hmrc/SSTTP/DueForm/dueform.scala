@@ -12,9 +12,9 @@ import play.api.data.format.Formats._
 object dueform {
   val form = Form(
     mapping(
-      "amount" -> of[Double],
-      "days" -> number,
-      "interest" -> of[Double]
+      "amount" -> nonEmptyText,
+      "days" -> nonEmptyText,
+      "interest" -> nonEmptyText
     )(DueFormInformation.apply)(DueFormInformation.unapply)
   )
 }
